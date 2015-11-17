@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<krpano>
+
+<!-- ************************ -->
+<!--         Messages         -->
+<!-- ************************ -->
+
+  <data name="en_project_title"><![CDATA[ciputragolfresto]]></data>
+  <data name="en_project_author_name"><![CDATA[abednego]]></data>
+  <data name="en_project_author_url"><![CDATA[http://www.architecgraphic.com]]></data>
+
+
+
+  <data name="en_pano9_title"><![CDATA[Palimanan Resto &amp; Cafe]]></data>
+
+
+  <data name="en_pano22_title"><![CDATA[27 Holes Golf Course]]></data>
+
+
+  <data name="en_pano24_title"><![CDATA[The Wedding Chapel]]></data>
+
+
+
+
+	<data name="en_project_floor_title"><![CDATA[ciputragolfresto]]></data>
+	<data name="en_spotmap45_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap46_tooltip"><![CDATA[]]></data>
+	<data name="en_spotmap47_tooltip"><![CDATA[]]></data>
+
+
+  <data name="en_togglebuttonfirsttooltip"><![CDATA[]]></data>
+  <data name="en_togglebuttonsecondtooltip"><![CDATA[]]></data>
+  <data name="en_descriptiondescription_title"><![CDATA[]]></data>
+  <data name="en_buttontooltip"><![CDATA[details]]></data>
+  <data name="en_togglebutton1firsttooltip"><![CDATA[masterplan]]></data>
+  <data name="en_togglebutton1secondtooltip"><![CDATA[masterplan]]></data>
+  <data name="en_button1tooltip"><![CDATA[instructions]]></data>
+  <data name="en_button2tooltip"><![CDATA[previous]]></data>
+  <data name="en_button3tooltip"><![CDATA[next]]></data>
+  <data name="en_logowebsiteurl"><![CDATA[http://www.ciputragolf.com]]></data>
+  <data name="en_logotooltipText"><![CDATA[Open website]]></data>
+
+
+
+  <data name="en_pano9_description"><![CDATA[<div><font color="#444444" face="arial, sans-serif" size="2"><div>Exotic scenery of lush green fairways and lake view accompany your excellent cuisine. Find the authentic atmosphere for the most exciting dining experience here at Ciputra Golf Resto &amp; Café, where we compliment you with both viewing pleasure and taste. Great food, good music, and the view to die for. Dining never look this good!</div><div>With a brand new concept, we offer you two different atmosphere. A friendly and warm restaurant during the day, with the most favorite menu Gurami Ulam, Salmon Menrui, and Iga Kuah Asam. A cozy and romantic café at night, special music performance accompanied every Friday Night during barbeque dinner.</div></font></div>]]></data>
+
+
+
+  <data name="en_pano22_description"><![CDATA[<div><font face="arial, sans-serif" size="2" color="#444444">Ciputra Golf covering 125 hectares of beautifully sculpted fairways and greens, designed to be the venue for regional and international tournaments. It is 27 holes, par 108 with length of 9145 meters – that will offer many unforgetable moments of achievement. The Golf Club opens 7 days a week to give more time to play.</font></div><div><font face="arial, sans-serif" size="2" color="#444444"><br></font></div><div><font face="arial, sans-serif" size="2" color="#444444">Ciputra Golf challenges each player, amateurs and professionals, to strive for excellence. Each tee box, landing area, fairway, bunker, green rough, grass, tree and bush is landscaped l a way to that compels players to think strategically for deriving the maximum enjoyment from the game. The course provides flexibility to players to set their own standards, with different tee boxes on each hole.</font></div>]]></data>
+
+
+
+  <data name="en_pano24_description"><![CDATA[<font face="arial, sans-serif" size="2" color="#444444">The Wedding Chapel is the most spectacular Wedding Pavilion in Surabaya. A one of a kind venue, designed to create the most memorable and romantic wedding experience. The Wedding Chapel is a masterpiece perfectly created for an unparalleled wedding ceremony. Towering up to 15 meters high, covered in crystal clear glass, overlooking its 360 degrees breathtaking view of the serene lake in the midst of lust green scenery of golf course. With its alluring atmosphere, your chapel will be sealed in the serenity of our wedding pavilion.</font>]]></data>
+</krpano>

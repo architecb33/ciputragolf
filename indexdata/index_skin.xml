@@ -1,0 +1,1059 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<krpano version="1.17">
+
+    
+  <!-- Spot Style - ripples -->
+  <style name="Iconripples"
+         url="%FIRSTXML%/spots/pointer_enter_user_defaultpoint0.gif"
+         visible="false"
+         zoom="true"
+         
+         onloaded="if(scene[get(xml.scene)].planar,if(zoom,set(zoom, false);););"
+         onhover="onhoverIconripples"
+         onover="onoverIconripples"
+         onout="onoutIconripples"
+         height="100"
+         width="100"
+         />
+  <action name="onhoverIconripples">
+    showtooltip(hotspot);
+  </action>
+  <action name="onoverIconripples">
+
+
+pauseautorotation();
+  </action>
+  <action name="onoutIconripples">
+    hideTooltip();
+
+
+resumeautorotation();
+  </action>
+
+          <!-- unsupported kind of display : PointMap -->
+
+  <!-- ****** -->
+  <!-- Footer -->
+  <!-- ****** -->
+  <layer name="footer"
+         keep="true"
+         url="%FIRSTXML%/graphics/footer/footergoldtrans2.png" 
+         align="bottom"
+         x="0"
+         y="0"
+         zorder="0"
+         enabled="false"
+         capture="true"
+         visible="false"
+
+         height="50"
+         width="100%"
+
+         />
+
+  <events name="footerevents" 
+    onTourStart="showfooter();"
+    hidetourcontrols="hidefooter();"
+    showtourcontrols="showfooter();"
+    keep="true" />
+
+  <action name="hidefooter">
+    set(layer[footer].visible, false);
+  </action>
+  <action name="showfooter">
+    set(layer[footer].visible, true);
+  </action>
+
+  <!-- ************************************************** -->
+  <!-- Toggle Button : bottomright -->
+  <!-- ************************************************** -->
+
+
+  <layer name="togglebutton"
+         keep="true"
+         url="%FIRSTXML%/graphics/togglebutton/open-close2.png" 
+         align="bottomright"
+         x="0"
+         y="0"
+         zorder="1"
+         state="true"
+         onclick="togglebuttonOnClick"
+         onout=""
+         height="50"
+         width="50"
+         visible="false"
+         />
+
+  <action name="togglebuttonOnClick">
+    if (state,
+      set(state, false);hideTourControls();
+      set(url,%FIRSTXML%/graphics/togglebutton/openclose.png);
+     ,
+      set(state, true);showTourControls();
+      set(url,%FIRSTXML%/graphics/togglebutton/open-close2.png);
+    );
+  </action>
+
+  <events name="togglebuttonevents" 
+    onTourStart="showtogglebutton();"
+    keep="true" />
+  <action name="hidetogglebutton">set(layer[togglebutton].visible, false);</action>
+  <action name="showtogglebutton">set(layer[togglebutton].visible, true);</action>
+
+  <!-- *********** -->
+  <!-- Description -->
+  <!-- *********** -->
+
+
+<ptplugin name="description" canStart="false" newPano="false" openatstart="false" startMethod="showPanoDescription-description" engine="kolorArea">
+	<settings>
+		<option name="position" value="center" type="string" />
+		<option name="start_position" value="top" type="string" />
+		<option name="margin_x" value="0" type="int" />
+		<option name="margin_y" value="0" type="int" />
+		<option name="background_color" value="ffffff" type="string" />
+		<option name="background_alpha" value="0.900007629510948" type="float" />
+		<option name="topleft_radius" value="0" type="int" />
+		<option name="topright_radius" value="0" type="int" />
+		<option name="bottomleft_radius" value="0" type="int" />
+		<option name="bottomright_radius" value="0" type="int" />
+		<option name="area_border_width" value="0" type="int" />
+		<option name="area_border_color" value="f2f2f2" type="string" />
+		<option name="padding" value="30" type="int" />
+		<option name="display_title" value="true" type="bool" />
+		<option name="title" value="" type="string" />
+		<option name="title_font" value="Arial" type="string" />
+		<option name="title_size" value="14" type="int" />
+		<option name="title_weight" value="bold" type="string" />
+		<option name="title_decoration" value="normal" type="string" />
+		<option name="title_color" value="ac9044" type="string" />
+		<option name="close_displayed" value="false" type="bool" />
+		<option name="overlay_displayed" value="true" type="bool" />
+		<option name="overlay_color" value="000000" type="string" />
+		<option name="overlay_alpha" value="0" type="float" />
+		<option name="area_width" value="300" type="int" />
+		<option name="area_height" value="250" type="int" />
+		<option name="area_width_unit" value="pixel" type="string" />
+		<option name="area_height_unit" value="pixel" type="string" />
+		<option name="animation" value="true" type="bool" />
+		<option name="animation_duration" value="300" type="int" />
+		<option name="refresh_content" value="true" type="bool" />
+		<option name="close_callback" value="invokeKrFunction('closeKolorAreaCallback-description')" type="string" />
+		<option name="close_on_click" value="true" type="bool" />
+		<option name="close_onclick_callback" value="invokeKrFunction('closeKolorAreaCallbackClick-description')" type="string" />
+		<option name="open_callback" value="invokeKrFunction('openKolorAreaCallback-description')" type="string" />
+		<option name="zorder" value="2" type="int" />
+		<option name="use_i18n" value="true" type="bool" />
+	</settings>
+</ptplugin>
+
+<action name="kolorAreaJsReady-description">
+	set(ptplugin[description].jsready, true);
+</action>
+
+<action name="updateTitle-description">
+	js(invokePluginFunction(description, changeTitle, get(scene[get(xml.scene)].titleid)));
+</action>
+
+<action name="openKolorArea-description">
+	set(ptplugin[description].isOpen, true);
+	js(showKolorArea(description, get(ptplugin[description].descID)));
+</action>
+
+<action name="closeKolorArea-description">
+	set(ptplugin[description].isOpen, false);
+	js(invokePluginFunction(description, closeKolorArea));
+</action>
+
+<action name="toggleKolorArea-description">
+	if(ptplugin[description].isOpen,
+		closeKolorArea-description();
+	,
+		openKolorArea-description();
+	);
+</action>
+
+<action name="closeKolorAreaCallback-description">
+	set(ptplugin[description].isOpen, false);
+	if(tour_displayinfo,hideTourInfo();
+	);
+</action>
+
+<action name="closeKolorAreaCallbackClick-description">
+	if(tour_displayinfo,hideTourInfo();
+	);
+</action>
+
+<action name="openKolorAreaCallback-description">
+	updateTitle-description();
+	
+</action>
+
+<action name="showKolorArea-description">
+	ifnot(ptplugin[description].startMethod == "",
+		delayedcall(0,get(ptplugin[description].startMethod));
+	,
+		js(invokePluginFunction(description, showKolorArea, %1));
+	);
+</action>
+	
+<action name="hideKolorArea-description">
+	js(invokePluginFunction(description, hideKolorArea, %1));
+</action>
+
+<action name="openDescription-description">
+	openKolorArea-description();
+</action>
+
+<action name="openSpotDescription-description">
+	set(ptplugin[description].descID, %1);
+	openKolorArea-description();
+</action>
+
+<action name="closeDescription-description">
+	set(ptplugin[description].currentGroup, false);
+	closeKolorArea-description();
+</action> 
+
+
+
+<action name="showPanoDescription-description">
+	if(ptplugin[description].canStart,
+		set(ptplugin[description].descID, get(scene[get(xml.scene)].descriptionid));
+		if(ptplugin[description].descID == null,
+			set(ptplugin[description].descID, "");
+		);
+		if(ptplugin[description].descID != "",
+			openDescription-description();
+		,
+			hideKolorArea-description(false);
+		);
+		set(ptplugin[description].startMethod, "");
+	);
+</action>
+
+<action name="refreshPanoDescription-description">
+	set(ptplugin[description].descID, get(scene[get(xml.scene)].descriptionid));
+	if(ptplugin[description].descID == null,
+		set(ptplugin[description].descID, "");
+	);
+	if(ptplugin[description].descID != "",
+		if(ptplugin[description].isOpen,
+			js(invokePluginFunction(description, updateKolorArea, get(ptplugin[description].descID)));
+			updateTitle-description();
+		);
+	,
+		closeDescription-description();
+	);
+</action>
+
+<action name="onNewPano-description">
+	if(ptplugin[description].newPano,
+		if(ptplugin[description].startMethod == "",
+			if(ptplugin[description].isOpen,
+				refreshPanoDescription-description();
+			,
+				if(tour_displaycontrols,
+				if(tour_displayinfo,
+				showPanoDescription-description();
+				,
+				refreshPanoDescription-description();
+				);
+				,
+				refreshPanoDescription-description();
+				);
+			);
+		);
+	);
+	set(ptplugin[description].newPano, true);
+</action>
+
+<events name="kolorAreaEvents-description" 
+	keep="true"
+	onTourStart="set(ptplugin[description].canStart, true);if(ptplugin[description].openatstart,showTourInfo();,if(tour_displaycontrols,if(tour_displayinfo,showTourInfo(););););"
+	onshowtourinfo="showPanoDescription-description();"
+	onhidetourinfo="closeDescription-description();"
+	onnewpano="onNewPano-description();"
+	hidetourcontrols="hideKolorArea-description(false);"
+	showtourcontrols="if(tour_displayinfo,if(ptplugin[description].isOpen,showKolorArea-description(false);,showPanoDescription-description();););"
+/>
+  <!-- ******************************************* -->
+  <!-- Button : bottom -->
+  <!-- ******************************************* -->
+  <layer name="button"
+         keep="true"
+         url="%FIRSTXML%/graphics/button/buttoninfo.png" 
+         align="bottom"
+         x="0"
+         y="0"
+         zorder="3"
+         visible="false"
+         onclick="buttonOnClick"
+         tooltip="buttontooltip"
+         onhover="showTooltip(bottom);"
+         onout="hideTooltip();tween(scale, 1.0,0.5,easeOutQuad);"
+         onover="tween(scale, 1.2,0.5,easeOutQuad);"
+         height="50"
+         width="50"
+         />
+  <action name="buttonOnClick">
+
+showPanoDescription-description();
+  </action>
+
+  <events name="buttonevents" 
+    onTourStart="showbutton();"
+    hidetourcontrols="hidebutton();" 
+    showtourcontrols="showbutton();" 
+    keep="true" />
+  <action name="hidebutton">set(layer[button].visible, false);</action>
+  <action name="showbutton">set(layer[button].visible, true);</action>
+
+
+
+	
+	<!-- ********* -->
+	<!-- FloorPlan -->
+	<!-- ********* -->
+	
+	<ptplugin name="floorPlan" engine="KolorFloorPlan">
+		<settings>
+			<option name="background_color" value="f2f2f2" type="string" />
+			<option name="background_lighter_color" value="ffffff" type="string" />
+			<option name="background_darker_color" value="cacaca" type="string" />
+			<option name="background_alpha" value="0" type="float" />
+			<option name="text_color" value="ffffff" type="string" />
+			<option name="resize" value="true" type="bool" />
+			<option name="fp_selector" value="one" type="string" />
+			<option name="fp_selector_label" value="floorPlanmenu_label" type="string" />
+			<option name="display_title" value="false" type="bool" />
+			<option name="title_font" value="Arial" type="string" />
+			<option name="title_size" value="14" type="int" />
+			<option name="title_weight" value="normal" type="string" />
+			<option name="title_decoration" value="normal" type="string" />
+			<option name="title_color" value="000000" type="string" />
+			<option name="display_orientation" value="false" type="bool" />
+			<option name="display_radar" value="true" type="bool" />
+			<option name="radar_radius" value="30" type="int" />
+			<option name="radar_line_width" value="1" type="int" />
+			<option name="radar_line_color" value="ffffff" type="string" />
+			<option name="radar_line_alpha" value="0" type="float" />
+			<option name="radar_fill_color" value="ffffff" type="string" />
+			<option name="radar_fill_alpha" value="0.6" type="float" />
+			<option name="close_on_click" value="true" type="bool" />
+			<option name="zorder" value="4" type="int" />
+		</settings>
+		
+		<floorplanItems selectedItem="fpitemmain" selectedSpot="" selectedSpotScene="" selectedSpotHeading="" selectedSpotFov="">
+				
+				<floorplanItem 
+					name="fpitemmain" 
+					width="737" 
+					height="680" 
+					groupName="" 
+					url="floorplan/floorplancgtrans3.png" 
+					title="project_floor_title"
+					heading="0">
+							<spot name="spotmap45" posX="0.226457" posY="0.228155" heading="21.7999999999995" desc="spotmap45_tooltip" descType="tooltip" groupName="" isScene="true" scene="pano9" jsClick="spotmap45ActionSpotFloorPlan">
+								<icon url="spots/pointer enter_user_defaultmap0.gif" iconWidth="30" iconHeight="30" iconAnchor="center" />
+							</spot>
+							<spot name="spotmap46" posX="0.383408" posY="0.825243" heading="54.3999999999999" desc="spotmap46_tooltip" descType="tooltip" groupName="" isScene="true" scene="pano24" jsClick="spotmap46ActionSpotFloorPlan">
+								<icon url="spots/pointer enter_user_defaultmap0.gif" iconWidth="30" iconHeight="30" iconAnchor="center" />
+							</spot>
+							<spot name="spotmap47" posX="0.224215" posY="0.48301" heading="138.799999999999" desc="spotmap47_tooltip" descType="tooltip" groupName="" isScene="true" scene="pano22" jsClick="spotmap47ActionSpotFloorPlan">
+								<icon url="spots/pointer enter_user_defaultmap0.gif" iconWidth="30" iconHeight="30" iconAnchor="center" />
+							</spot>
+				</floorplanItem>
+			
+			
+		</floorplanItems>
+	</ptplugin>
+	
+	<action name="kolorFloorplanJsReady-floorPlan">
+		set(ptplugin[floorPlan].jsready, true);
+	</action>
+	
+	
+		<!-- floorplan main spots counter : 3 -->
+			<action name="spotmap45ActionSpotFloorPlan">zoomto(get(panoview.fov),smooth(400,20,100));
+          if (xml.scene != pano9,
+            mainloadscene(pano9);
+          );lookat(get(panoview.h), get(panoview.v), get(panoview.fov));</action>
+			<action name="spotmap46ActionSpotFloorPlan">zoomto(get(panoview.fov),smooth(400,20,100));
+          if (xml.scene != pano24,
+            mainloadscene(pano24);
+          );lookat(get(panoview.h), get(panoview.v), get(panoview.fov));</action>
+			<action name="spotmap47ActionSpotFloorPlan">zoomto(get(panoview.fov),smooth(400,20,100));
+          if (xml.scene != pano22,
+            mainloadscene(pano22);
+          );lookat(get(panoview.h), get(panoview.v), get(panoview.fov));</action>
+	
+	
+	
+	<events name="floorPlanEvents" 
+	onxmlcomplete="ifnot(floorPlanFloorPlanLoaded,set(tour_displayfloorplan,false););floorPlanActivateDefaultSpot();" 
+	onviewchanged="floorPlanOnViewChange();" 
+	onhidetourfloorplan="delayedcall(1.0,floorPlanCloseTourFloorPlan(););" 
+	onshowtourfloorplan="if(tour_displayfloorplan,floorPlanOpenTourFloorPlan(););" 
+	onTourStart="set(loadedState-floorPlanArea, get(tour_displaycontrols));"
+	keep="true" />
+	
+	
+	<krpano floorPlanFloorPlanLoaded="false" />
+	
+	<action name="floorPlanHideTourFloorPlan">
+		hideKolorArea-floorPlanArea(true);
+	</action>
+	
+	<action name="floorPlanCloseTourFloorPlan">
+		if(ptplugin[floorPlanArea].isOpen,
+			closeKolorArea-floorPlanArea();
+		);
+	</action>
+	
+	<action name="floorPlanShowTourFloorPlan">
+		showKolorArea-floorPlanArea(true);
+	</action>
+	
+	<action name="floorPlanOpenTourFloorPlan">
+		ifnot(ptplugin[floorPlanArea].isOpen,
+			openKolorArea-floorPlanArea();
+		);
+	</action>
+	
+	<action name="floorPlanOnViewChange">
+		if (floorPlanFloorPlanLoaded == true,
+			ifnot(ptplugin[floorPlan].floorplanItems[0].selectedSpot == "",
+				js(invokePluginFunction(floorPlan, changeDirection, get(xml.scene), get(view.hlookat), get(view.fov)));
+			);
+		);
+	</action>
+	
+	<action name="floorPlanActivateSpot">
+		
+		set(ptplugin[floorPlan].floorplanItems[0].selectedSpot, %1);
+		set(ptplugin[floorPlan].floorplanItems[0].selectedItem, %2);
+		
+		ifnot(%1 == "",
+			set(ptplugin[floorPlan].floorplanItems[0].selectedSpotScene, get(xml.scene));
+			set(ptplugin[floorPlan].floorplanItems[0].selectedSpotHeading, get(view.hlookat));
+			set(ptplugin[floorPlan].floorplanItems[0].selectedSpotFov, get(view.fov));
+		);
+		
+		js(invokePluginFunction(floorPlan, selectSpot, %1, %2, %3));
+	</action>
+	
+	<action name="floorPlanDeactivateSpot">
+		set(ptplugin[floorPlan].floorplanItems[0].selectedSpot, "");
+		
+		js(invokePluginFunction(floorPlan, unselectSpot));
+	</action>
+	
+	<action name="floorPlanActivateDefaultSpot">
+		set(floorPlanFloorPlanLoaded, true);
+		
+		set(floorPlanSpotFound, "");
+		set(floorPlanSpotScene, "");
+		set(floorPlanItemFound, "");
+		set(floorPlanItemSearch, true);
+		set(floorPlanSpotSearch, true);
+		set(floorPlanSpotSearchContinue, true);
+		
+		
+		set(defaultfloorplaniteminc-wait,50);
+		for(set(defaultfloorplaniteminc,0), defaultfloorplaniteminc LT ptplugin[floorPlan].floorplanItems[0].floorplanItem.count , inc(defaultfloorplaniteminc),
+			if(defaultfloorplaniteminc-wait == defaultfloorplaniteminc,
+				add(defaultfloorplaniteminc-wait,50);
+				wait(0);
+			);
+			if(floorPlanSpotSearch == true,
+				
+				if(ptplugin[floorPlan].floorplanItems[0].floorplanItem[get(defaultfloorplaniteminc)].groupName == scene[get(xml.scene)].group,
+					set(floorPlanItemFound, get(ptplugin[floorPlan].floorplanItems[0].floorplanItem[get(defaultfloorplaniteminc)].name));
+					set(ptplugin[floorPlan].floorplanItems[0].selectedItem, get(ptplugin[floorPlan].floorplanItems[0].floorplanItem[get(defaultfloorplaniteminc)].name));
+					set(floorPlanItemSearch, false);
+				,
+					
+					if(floorPlanItemFound == "",
+						set(floorPlanItemFound, get(ptplugin[floorPlan].floorplanItems[0].floorplanItem[fpitemmain].name));
+						set(ptplugin[floorPlan].floorplanItems[0].selectedItem, get(ptplugin[floorPlan].floorplanItems[0].floorplanItem[fpitemmain].name));
+					);
+				);
+			);
+			if(floorPlanSpotSearch == true,
+				set(defaultspotinc-wait,50);
+				for(set(defaultspotinc,0), defaultspotinc LT ptplugin[floorPlan].floorplanItems[0].floorplanItem[get(defaultfloorplaniteminc)].spot.count , inc(defaultspotinc),
+					if(defaultspotinc-wait == defaultspotinc,
+						add(defaultspotinc-wait,50);
+						wait(0);
+					);
+					if(ptplugin[floorPlan].floorplanItems[0].floorplanItem[get(defaultfloorplaniteminc)].spot[get(defaultspotinc)].isScene == true,
+					
+						if(floorPlanSpotSearchContinue == true,
+							if(ptplugin[floorPlan].floorplanItems[0].floorplanItem[get(defaultfloorplaniteminc)].spot[get(defaultspotinc)].scene == xml.scene,
+								set(floorPlanSpotFound, get(ptplugin[floorPlan].floorplanItems[0].floorplanItem[get(defaultfloorplaniteminc)].spot[get(defaultspotinc)].name));
+								set(floorPlanSpotScene, get(ptplugin[floorPlan].floorplanItems[0].floorplanItem[get(defaultfloorplaniteminc)].spot[get(defaultspotinc)].scene));
+								set(ptplugin[floorPlan].floorplanItems[0].selectedItem, get(ptplugin[floorPlan].floorplanItems[0].floorplanItem[get(defaultfloorplaniteminc)].name));
+								if(floorPlanItemSearch == false,
+									set(floorPlanSpotSearchContinue, false);
+									set(floorPlanSpotSearch, false);
+								);
+							);
+						);
+					);
+					
+				);
+			);
+		);
+		
+		if(floorPlanSpotFound == "",
+			
+			
+			floorPlanDeactivateSpot();
+			
+			
+			set(ptplugin[floorPlan].floorplanItems[0].selectedItem, get(floorPlanItemFound));
+			
+			
+			ifnot(ptplugin[floorPlan].floorplanItems[0].selectedItem == "",
+				floorPlanActivateSpot("", get(ptplugin[floorPlan].floorplanItems[0].selectedItem), "");
+			);
+		,
+			
+			floorPlanActivateSpot(get(floorPlanSpotFound), get(ptplugin[floorPlan].floorplanItems[0].selectedItem), get(floorPlanSpotScene));
+		);
+	</action>
+	
+	<action name="floorPlanChangeTitle">
+		js(invokePluginFunction(floorPlan, changeTitle, %1));
+	</action>
+	
+	<ptplugin name="floorPlanArea" engine="kolorArea">
+	<settings>
+		<option name="position" value="topleft" type="string" />
+		<option name="start_position" value="left" type="string" />
+		<option name="margin_x" value="15" type="int" />
+		<option name="margin_y" value="15" type="int" />
+		<option name="display_title" value="false" type="bool" />
+		<option name="title_font" value="Arial" type="string" />
+		<option name="title_size" value="14" type="int" />
+		<option name="title_weight" value="normal" type="string" />
+		<option name="title_decoration" value="normal" type="string" />
+		<option name="title_color" value="000000" type="string" />
+		<option name="close_displayed" value="false" type="bool" />
+		<option name="background_color" value="f2f2f2" type="string" />
+		<option name="background_alpha" value="0" type="float" />
+		<option name="overlay_displayed" value="false" type="bool" />
+		<option name="overlay_color" value="000000" type="string" />
+		<option name="overlay_alpha" value="0.500007629510948" type="float" />
+		<option name="padding" value="0" type="int" />
+		<option name="topleft_radius" value="0" type="int" />
+		<option name="topright_radius" value="0" type="int" />
+		<option name="bottomleft_radius" value="0" type="int" />
+		<option name="bottomright_radius" value="0" type="int" />
+		<option name="area_border_width" value="0" type="int" />
+		<option name="area_border_color" value="f2f2f2" type="string" />
+		<option name="area_width" value="50" type="int" />
+		<option name="area_height" value="50" type="int" />
+		<option name="area_width_unit" value="percent" type="string" />
+		<option name="area_height_unit" value="percent" type="string" />
+		<option name="animation" value="true" type="bool" />
+		<option name="animation_duration" value="538" type="int" />
+		<option name="close_on_click" value="true" type="bool" />
+		<option name="refresh_content" value="false" type="bool" />
+		<option name="open_callback" value="addKolorFloorPlan('floorPlan', 'floorPlanArea-floorplanDIV');" type="string" />
+		<option name="close_callback" value="invokeKrFunction('closeKolorAreaCallback-floorPlanArea')" type="string" />
+		<option name="zorder" value="4" type="int" />
+	</settings>
+	</ptplugin>
+	
+	<action name="kolorAreaJsReady-floorPlanArea">
+		set(ptplugin[floorPlanArea].jsready, true);
+	</action>
+	
+	<action name="openKolorArea-floorPlanArea">
+		ifnot(ptplugin[floorPlanArea].isOpen,
+			if(ptplugin[floorPlanArea].doNotDeleteMe,
+				set(ptplugin[floorPlanArea].currentCall, false);
+			set(ptplugin[floorPlanArea].isOpen, true);
+			set(ptplugin[floorPlanArea].visible, true);
+			set(ptplugin[floorPlanArea].doNotDeleteMe, false);
+			
+			js(showKolorArea(floorPlanArea, &lt;div id="floorPlanArea-floorplanDIV"&gt;&lt;/div&gt;));
+			,
+				set(ptplugin[floorPlanArea].currentCall, true);
+				set(ptplugin[floorPlanArea].doNotDeleteMe, true);
+				events.dispatch(onremovedisplayedobject);
+				delayedcall(1.0,openKolorArea-floorPlanArea(););
+			);
+		);
+	</action>
+	
+	<action name="closeKolorArea-floorPlanArea">
+		if(ptplugin[floorPlanArea].isOpen,
+			if(ptplugin[floorPlanArea].doNotDeleteMe,
+				set(ptplugin[floorPlanArea].doNotDeleteMe, false);
+			,
+			
+			js(invokePluginFunction(floorPlanArea, closeKolorArea));
+			set(ptplugin[floorPlanArea].isOpen, false);
+			);
+		);
+	</action>
+	
+	<action name="toggleKolorArea-floorPlanArea">
+		if(ptplugin[floorPlanArea].isOpen,
+			closeKolorArea-floorPlanArea();
+		,
+			openKolorArea-floorPlanArea();
+		);
+	</action>
+	
+	<action name="closeKolorAreaCallback-floorPlanArea">
+		
+		set(ptplugin[floorPlanArea].doNotDeleteMe, false);
+		set(ptplugin[floorPlanArea].isOpen, false);hideFloorplan();
+	</action>
+	
+	<action name="changeTitleKolorArea-floorPlanArea">
+		js(invokePluginFunction(floorPlanArea, changeTitle, %1));
+	</action>
+	
+	<action name="showKolorArea-floorPlanArea">
+		if(ptplugin[floorPlanArea].doNotDeleteMe,
+			set(ptplugin[floorPlanArea].currentCall, false);
+		set(ptplugin[floorPlanArea].visible, true);
+		set(ptplugin[floorPlanArea].doNotDeleteMe, false);
+		
+		js(invokePluginFunction(floorPlanArea, showKolorArea, %1));
+		,
+			set(ptplugin[floorPlanArea].currentCall, true);
+			set(ptplugin[floorPlanArea].doNotDeleteMe, true);
+			events.dispatch(onremovedisplayedobject);
+			delayedcall(1.0,showKolorArea-floorPlanArea(););
+		);
+	</action>
+		
+	<action name="hideKolorArea-floorPlanArea">
+		if(ptplugin[floorPlanArea].doNotDeleteMe,
+			set(ptplugin[floorPlanArea].doNotDeleteMe, false);
+		,
+		
+		set(ptplugin[floorPlanArea].visible, false);
+		js(invokePluginFunction(floorPlanArea, hideKolorArea, %1));
+		);
+	</action>
+	
+	<events name="kolorAreaEvents-floorPlanArea" 
+		keep="true"
+		hidetourcontrols="hideKolorArea-floorPlanArea(false);"
+		showtourcontrols="if(tour_displayfloorplan,showKolorArea-floorPlanArea(false););set(loadedState-floorPlanArea, get(tour_displaycontrols));"
+		onremovedisplayedobject="ifnot(ptplugin[floorPlanArea].currentCall,if(ptplugin[floorPlanArea].visible,hideFloorplan();););"
+	/>
+	
+	
+  <!-- ************************************************** -->
+  <!-- Toggle Button : bottom -->
+  <!-- ************************************************** -->
+
+
+  <layer name="togglebutton1"
+         keep="true"
+         url="%FIRSTXML%/graphics/togglebutton1/buttonplan.png" 
+         align="bottom"
+         x="-50"
+         y="0"
+         zorder="5"
+         tooltip=""
+         onhover="togglebutton1OnHover"
+         state="true"
+         onclick="togglebutton1OnClick"
+         onover="tween(scale, 1.2,0.5,easeOutQuad);"
+         onout="hideTooltip();tween(scale, 1.0,0.5,easeOutQuad);"
+         height="50"
+         width="50"
+         visible="false"
+         />
+
+  <action name="togglebutton1OnHover">
+    if (state,
+      set(tooltip, togglebutton1firsttooltip);
+     ,
+      set(tooltip, togglebutton1secondtooltip);
+    );
+    if (tooltip != "", showTooltip(bottom));;
+  </action>
+  <action name="togglebutton1OnClick">
+    if (state,
+      set(state, false);showFloorplan();
+      set(url,%FIRSTXML%/graphics/togglebutton1/buttonplan.png);
+     ,
+      set(state, true);showFloorplan();
+      set(url,%FIRSTXML%/graphics/togglebutton1/buttonplan.png);
+    );
+  </action>
+
+  <events name="togglebutton1events" 
+    onTourStart="showtogglebutton1();"
+    hidetourcontrols="hidetogglebutton1();" 
+    showtourcontrols="showtogglebutton1();" 
+    keep="true" />
+  <action name="hidetogglebutton1">set(layer[togglebutton1].visible, false);</action>
+  <action name="showtogglebutton1">set(layer[togglebutton1].visible, true);</action>
+
+  <!-- ************************ -->
+  <!-- Title : current panorama -->
+  <!-- ************************ -->
+
+  <events name="title_currentpanorama_events" 
+    onTourStart="showtitle_currentpanorama();"
+    hidetourcontrols="hidetitle_currentpanorama();" 
+    showtourcontrols="showtitle_currentpanorama();" 
+    onnewpano="updatetitle_currentpanorama();" 
+    keep="true" />
+
+  <action name="hidetitle_currentpanorama">set(layer[title_currentpanorama].visible, false);</action>
+  <action name="showtitle_currentpanorama">set(layer[title_currentpanorama].visible, true );</action>
+
+  <action name="updatetitle_currentpanorama">
+    getmessage(layer[title_currentpanorama].html, get(scene[get(xml.scene)].titleid));
+    escape(layer[title_currentpanorama].html);
+  </action>
+  <layer name="title_currentpanorama" keep="true" zorder="6"
+         url="%FIRSTXML%/graphics/textfield.swf"
+         align="bottom" x="0" y="55" width="100%" autoheight="true"
+         background="false" capture="false" handcursor="false" selectable="false" enabled="false"
+         borderwidth="0"
+         alpha="1"
+         visible="false"
+         textshadow="1"
+         css="text-align:center;
+              color:#ffffff;
+              font-family:Arial;
+              font-weight:bold;
+              font-size:16px;"/>
+  <!-- ******************************************* -->
+  <!-- Button : bottom -->
+  <!-- ******************************************* -->
+  <layer name="button1"
+         keep="true"
+         url="%FIRSTXML%/graphics/button1/buttonhelp.png" 
+         align="bottom"
+         x="50"
+         y="0"
+         zorder="7"
+         visible="false"
+         onclick="button1OnClick"
+         tooltip="button1tooltip"
+         onhover="showTooltip(bottom);"
+         onout="hideTooltip();tween(scale, 1.0,0.5,easeOutQuad);"
+         onover="tween(scale, 1.2,0.5,easeOutQuad);"
+         height="50"
+         width="50"
+         />
+  <action name="button1OnClick">
+displayImage(  %FIRSTXML%/graphics/button1/instructions.png 
+             ,center,0,0
+             ,300
+             ,300
+
+             ,false
+             );
+  </action>
+
+  <events name="button1events" 
+    onTourStart="showbutton1();"
+    hidetourcontrols="hidebutton1();" 
+    showtourcontrols="showbutton1();" 
+    keep="true" />
+  <action name="hidebutton1">set(layer[button1].visible, false);</action>
+  <action name="showbutton1">set(layer[button1].visible, true);</action>
+
+  <!-- ******************************************* -->
+  <!-- Button : bottom -->
+  <!-- ******************************************* -->
+  <layer name="button2"
+         keep="true"
+         url="%FIRSTXML%/graphics/button2/buttonleft.png" 
+         align="bottom"
+         x="-100"
+         y="0"
+         zorder="8"
+         visible="false"
+         onclick="button2OnClick"
+         tooltip="button2tooltip"
+         onhover="showTooltip(bottom);"
+         onout="hideTooltip();tween(scale, 1.0,0.5,easeOutQuad);"
+         onover="tween(scale, 1.2,0.5,easeOutQuad);"
+         height="50"
+         width="50"
+         />
+  <action name="button2OnClick">
+loadPreviousScene();
+  </action>
+
+  <events name="button2events" 
+    onTourStart="showbutton2();"
+    hidetourcontrols="hidebutton2();" 
+    showtourcontrols="showbutton2();" 
+    keep="true" />
+  <action name="hidebutton2">set(layer[button2].visible, false);</action>
+  <action name="showbutton2">set(layer[button2].visible, true);</action>
+
+  <!-- ******************************************* -->
+  <!-- Button : bottom -->
+  <!-- ******************************************* -->
+  <layer name="button3"
+         keep="true"
+         url="%FIRSTXML%/graphics/button3/buttonright.png" 
+         align="bottom"
+         x="100"
+         y="0"
+         zorder="9"
+         visible="false"
+         onclick="button3OnClick"
+         tooltip="button3tooltip"
+         onhover="showTooltip(bottom);"
+         onout="hideTooltip();tween(scale, 1.0,0.5,easeOutQuad);"
+         onover="tween(scale, 1.2,0.5,easeOutQuad);"
+         height="50"
+         width="50"
+         />
+  <action name="button3OnClick">
+loadNextScene();
+  </action>
+
+  <events name="button3events" 
+    onTourStart="showbutton3();"
+    hidetourcontrols="hidebutton3();" 
+    showtourcontrols="showbutton3();" 
+    keep="true" />
+  <action name="hidebutton3">set(layer[button3].visible, false);</action>
+  <action name="showbutton3">set(layer[button3].visible, true);</action>
+
+  <!-- ************ -->
+  <!-- Logo : viewport / topright -->
+  <!-- ************ -->
+
+
+  <layer align="topright"
+         x="30"
+         y="30"
+         zorder="10"
+         name="logo"
+         keep="true"
+         visible="false"
+         capture="false"
+		
+			tooltip="logotooltipText"
+			onhover="showTooltip(topright);"
+			onout="hideTooltip();"
+         url="%FIRSTXML%/graphics/logo/logocg.png" 
+         onclick="openurl(http://www.ciputragolf.com,_blank);"
+
+         height="138"
+         width="160"
+
+         />
+
+  <events name="logoevents" 
+    onTourStart="showlogo();"
+    keep="true" />
+
+  <action name="hidelogo">
+    set(layer[logo].visible, false);
+  </action>
+  <action name="showlogo">
+      set(layer[logo].visible, true);
+  </action>
+
+
+
+
+
+  <action name="displayImage">
+    if (%1 == null,
+      showlog();trace("Display Image : function called without any image. Verify its parameters in Panotour.");
+    ,
+    if (layer[displayedStandardImage],
+      if(layer[displayedStandardImage].doNotDeleteMe,
+        set(layer[displayedStandardImage].currentCall, false);
+        set(layer[displayedStandardImage].visible, true);
+        set(layer[displayedStandardImage].doNotDeleteMe, false);
+        
+        if (%1 == layer[displayedStandardImage].url,resumeautorotation();
+          removelayer(displayedStandardImage);
+        ,
+          setDisplayedImageObjectParameters(%1, %2, %3, %4, %5, %6);
+        );
+      ,
+        set(layer[displayedStandardImage].currentCall, true);
+        set(layer[displayedStandardImage].doNotDeleteMe, true);
+        events.dispatch(onremovedisplayedobject);
+        delayedcall(0.2,displayImage(%1, %2, %3, %4, %5, %6, %7););
+      );
+    ,
+      addlayer(displayedStandardImage);
+      set(layer[displayedStandardImage].keep, false);
+      set(layer[displayedStandardImage].onclick, resumeautorotation();removelayer(displayedStandardImage));
+      set(layer[displayedStandardImage].zorder , 99);
+      
+      set(layer[displayedStandardImage].currentCall, true);
+      set(layer[displayedStandardImage].doNotDeleteMe, true);
+      events.dispatch(onremovedisplayedobject);
+      delayedcall(0.2,displayImage(%1, %2, %3, %4, %5, %6, %7););
+      if (%7,pauseautorotation(););
+      set(layer[displayedStandardImage].visible, false);
+    );
+    );
+  </action>
+  <action name="setDisplayedImageObjectParameters">
+    set(layer[displayedStandardImage].url    , %1);
+    set(layer[displayedStandardImage].align  , %2);
+    set(layer[displayedStandardImage].x      , %3);
+    set(layer[displayedStandardImage].y      , %4);
+    set(layer[displayedStandardImage].width  , %5);
+    set(layer[displayedStandardImage].height , %6);
+  </action> 
+  <events name="displayedImageObjectEvents" keep="true" onremovedisplayedobject="displayedImageObjectOnRemoveDisplayedObject"/>
+  <action name="displayedImageObjectOnRemoveDisplayedObject">
+    ifnot(layer[displayedStandardImage].currentCall,if(layer[displayedStandardImage].visible,resumeautorotation();
+      removelayer(displayedStandardImage);
+    ););
+  </action>
+  <!-- FLOORPLAN -->
+  <action name="hideFloorplan">set(tour_displayfloorplan, false);events.dispatch(onhidetourfloorplan);</action>
+  <action name="showFloorplan">set(tour_displayfloorplan, true); events.dispatch(onshowtourfloorplan);</action>
+  <!-- Hide / Show Controls -->
+  <action name="hideTourControls">set(tour_displaycontrols, false);events.dispatch(hidetourcontrols);</action>
+  <action name="showTourControls">set(tour_displaycontrols, true); events.dispatch(showtourcontrols);</action>
+  <!-- Tour Information -->
+  <action name="hideTourInfo">set(tour_displayinfo, false);events.dispatch(onhidetourinfo);</action>
+  <action name="showTourInfo">set(tour_displayinfo, true); events.dispatch(onshowtourinfo);</action>
+  <!-- Sounds Management -->
+  <plugin name="soundinterface"
+          preload="true"
+          url="%FIRSTXML%/graphics/soundinterface.js"
+          rootpath="%FIRSTXML%/sounds"
+          backgroundsound=""
+          backgroundsoundloops="0"
+          bgsound="false"
+          volumeinitialized="false"
+          keep="true"/>
+  <events name="soundmanagementevents"
+          onnewpano="playbackgroundsound();"
+          onxmlcomplete="soundinterfaceonxmlcomplete();"
+          keep="true"/>
+  <action name="soundinterfaceonxmlcomplete">
+    ifnot(plugin[soundinterface].volumeinitialized,
+      div(plugin[soundinterface].volume, tour_soundsvolume, 100);
+      set(plugin[soundinterface].volumeinitialized,true);
+    );
+  </action>
+  <action name="playsound3Dwhenpossible">
+    set(really_play_sound, true);
+    if (tour_current_played_sound,
+      if (%1 == tour_current_played_sound,
+        stopsound(%1);
+        delete(tour_current_played_sound);
+        set(really_play_sound, false);
+      );
+    );
+    if (really_play_sound,
+      if (tour_current_played_sound,
+        stopsound(get(tour_current_played_sound));
+      );
+      if (%3,
+        if (device.flash,
+          playsound3D(%1,%2,%4,%5);
+        ,
+          playsound(%1,%2);
+        );
+      , 
+        playsound(%1,%2);
+      );
+      set(tour_current_played_sound, %1);
+    );
+  </action>
+  <action name="playbackgroundsound">
+    if (xml.scene,
+      if (scene[get(xml.scene)].backgroundsound,
+        if (plugin[soundinterface].backgroundsound != scene[get(xml.scene)].backgroundsound,
+          copy(plugin[soundinterface].backgroundsound     , scene[get(xml.scene)].backgroundsound);
+          copy(plugin[soundinterface].backgroundsoundloops, scene[get(xml.scene)].backgroundsoundloops);
+          if (tour_soundson == true,
+            playsound(bgsoundname, get(plugin[soundinterface].backgroundsound), get(plugin[soundinterface].backgroundsoundloops));
+            set(plugin[soundinterface].bgsound, true);
+           ,
+            set(plugin[soundinterface].bgsound, false);
+          );
+        );
+      );
+    );
+  </action>
+  <action name="resetbackgroundsoundifneeded">
+    if (xml.scene,
+      if (scene[get(xml.scene)].backgroundsound != scene[%1].backgroundsound,
+        if (plugin[soundinterface].backgroundsound,
+          if (plugin[soundinterface].bgsound,
+            stopsound(bgsoundname);
+          );
+        );
+        set(plugin[soundinterface].backgroundsound     , "");
+        set(plugin[soundinterface].backgroundsoundloops, 0);
+        set(plugin[soundinterface].bgsound             , false);
+      );
+    );
+  </action>
+  <action name="pausebackgroundsound">
+    if (plugin[soundinterface].backgroundsound,
+      if (plugin[soundinterface].bgsound,
+        pausesound(bgsoundname);
+      );
+    );
+  </action>
+  <action name="resumebackgroundsound">
+    if (tour_soundson == true,
+      if (plugin[soundinterface].backgroundsound,
+        if (plugin[soundinterface].bgsound,
+          resumesound(bgsoundname);
+         ,
+          playsound(bgsoundname, get(plugin[soundinterface].backgroundsound), get(plugin[soundinterface].backgroundsoundloops));
+          set(plugin[soundinterface].bgsound, true);
+        );
+      );
+    );
+  </action>
+  <action name="preloadSounds">
+    preloadsound("relaxin__jazz_loop.mp3");
+  </action>
+  <action name="play3DLocalSounds">
+    if (xml.scene, if (scene[get(xml.scene)].haslocalsounds, playpanolocalsounds();););
+  </action>
+  <action name="stop3DLocalSounds">
+    if (xml.scene, if (scene[get(xml.scene)].haslocalsounds, stoppanolocalsounds();););
+  </action>
+  <action name="set3DLocalSoundsVolume">
+    if (xml.scene, if (scene[get(xml.scene)].haslocalsounds, setpanolocalsoundsvolume();););
+  </action>
+  <action name="playTourSounds">
+    set(tour_soundson, true);events.dispatch(playtoursoundsevent);
+    play3DLocalSounds();
+    resumebackgroundsound();
+  </action>
+  <action name="stopTourSounds">
+    set(tour_soundson, false);events.dispatch(stoptoursoundsevent);
+    stop3DLocalSounds();
+    if (tour_current_played_sound,
+      stopsound(get(tour_current_played_sound));
+      delete(tour_current_played_sound);
+    );
+    pausebackgroundsound();
+  </action>
+  <action name="setTourSoundsVolume">
+    set(tour_soundsvolume, %1);
+    div(volume, tour_soundsvolume, 100);
+    set(plugin[soundinterface].volume, get(volume));
+    set3DLocalSoundsVolume();
+  </action>
+</krpano>
