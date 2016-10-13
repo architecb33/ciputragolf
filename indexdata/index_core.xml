@@ -18,7 +18,7 @@
   <krpano tour_gyroscopedevices="true" devices="tablet|mobile" />
   <krpano videos_sounds_path="%FIRSTXML%" devices="html5" />
   <krpano videos_sounds_path="%SWFPATH%" devices="flash" />
-<krpano stagescale="2.0" devices="android+mobile" />
+<krpano stagescale="1.6" devices="android+mobile" />
 
   <!-- Control Mode Management -->
   <events name="controlmodenewpanoevent" onnewpano="controlmodenewpanoaction();" keep="true"/>
